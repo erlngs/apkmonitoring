@@ -7,7 +7,6 @@ class RiwayatKehadiranWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final kehadiranProvider = Provider.of<KehadiranProvider>(context);
 
-    // Cek apakah riwayat kosong
     if (kehadiranProvider.riwayat.isEmpty) {
       return Center(
         child: Text(
@@ -17,7 +16,6 @@ class RiwayatKehadiranWidget extends StatelessWidget {
       );
     }
 
-    // Jika riwayat tidak kosong, tampilkan daftar
     return ListView.builder(
       itemCount: kehadiranProvider.riwayat.length,
       itemBuilder: (context, index) {
