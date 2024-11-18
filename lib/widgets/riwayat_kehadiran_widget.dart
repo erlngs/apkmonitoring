@@ -7,13 +7,26 @@ class RiwayatKehadiranWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final kehadiranProvider = Provider.of<KehadiranProvider>(context);
 
+    // Cek apakah riwayat kosong
+    if (kehadiranProvider.riwayat.isEmpty) {
+      return Center(
+        child: Text(
+          'Riwayat Kosong, Silakan absen dahulu',
+          style: TextStyle(fontSize: 18),
+        ),
+      );
+    }
+
+    // Jika riwayat tidak kosong, tampilkan daftar
     return ListView.builder(
       itemCount: kehadiranProvider.riwayat.length,
       itemBuilder: (context, index) {
         final data = kehadiranProvider.riwayat[index];
         return ListTile(
           title: Text('${data['tanggal'].toString().split(' ')[0]}'),
-          subtitle: Text('Hadir: ${data['hadir']}, Tidak Hadir: ${data['tidakHadir']}'),
+          subtitle: Text(
+            'Hadir: ${data['hadir']}, Tidak Hadir: ${data['tidakHadir']}',
+          ),
         );
       },
     );
