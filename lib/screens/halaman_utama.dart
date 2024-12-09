@@ -9,8 +9,9 @@ class HalamanUtama extends StatelessWidget {
     final kehadiranProvider = Provider.of<KehadiranProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Presensi Siswa'),
-      backgroundColor: const Color.fromARGB(255, 16, 200, 225),
+      appBar: AppBar(
+        title: Text('Presensi Siswa'),
+        backgroundColor: const Color.fromARGB(255, 16, 200, 225),
       ),
       body: Column(
         children: [
@@ -24,7 +25,16 @@ class HalamanUtama extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: kehadiranProvider.siswa.any((s) => s.hadir)
-                      ? kehadiranProvider.simpanKehadiran
+                      ? () {
+                          kehadiranProvider.simpanKehadiran();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Kehadiran berhasil disimpan!'),
+                              duration: Duration(seconds: 2),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                        }
                       : null,
                   child: Text('Simpan Kehadiran'),
                 ),
