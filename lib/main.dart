@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart'; 
 import 'package:provider/provider.dart';
-import './providers/kehadiran_provider.dart';
-import './screens/halaman_utama.dart';
-import './screens/halaman_riwayat.dart';
+import 'providers/kehadiran_provider.dart';
+import 'screens/halaman_utama.dart';
+import 'screens/halaman_riwayat.dart'; 
 
-void main() => runApp(AplikasiPresensi());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); 
+  await initializeDateFormatting('id_ID', null); 
+  runApp(AplikasiPresensi());
+}
 
 class AplikasiPresensi extends StatelessWidget {
   @override

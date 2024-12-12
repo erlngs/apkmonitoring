@@ -26,13 +26,26 @@ class HalamanUtama extends StatelessWidget {
                 ElevatedButton(
                   onPressed: kehadiranProvider.siswa.any((s) => s.hadir)
                       ? () {
+                          // Simpan kehadiran
                           kehadiranProvider.simpanKehadiran();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Kehadiran berhasil disimpan!'),
-                              duration: Duration(seconds: 2),
-                              backgroundColor: Colors.green,
-                            ),
+
+                          // Menampilkan popup (AlertDialog)
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Berhasil'),
+                                content: Text('Kehadiran berhasil disimpan!'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop(); // Tutup popup
+                                    },
+                                    child: Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
                           );
                         }
                       : null,
